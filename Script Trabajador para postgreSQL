@@ -1,0 +1,26 @@
+CREATE TABLE trabajador (
+    id_trabajador                INTEGER NOT NULL,
+    nombre_completo_trabajador  VARCHAR(120) NOT NULL,
+    nacionalidad                VARCHAR(50) NOT NULL,
+    dv_trabajador               CHAR(1) NOT NULL,
+    rut_trabajador              VARCHAR(20) NOT NULL,
+    fecha_nacimiento_trabajador VARCHAR(20) NOT NULL,
+    fecha_ingreso_trabajador    VARCHAR(20) NOT NULL,
+    estado_civil_trabajador     VARCHAR(20) NOT NULL,
+    procedencia_trabajador      VARCHAR(50) NOT NULL,
+    direeccion_trabajador       VARCHAR(300) NOT NULL,
+    afp_trabajador              VARCHAR(100) NOT NULL,
+    sistema_salud_trabajador    VARCHAR(50) NOT NULL,
+    posee_cuenta_trabajador     VARCHAR(50) NOT NULL,
+    edad                        INTEGER NOT NULL,
+    telefono_emerg_trabajador   VARCHAR(15) NOT NULL,
+    telefono_trabajador         VARCHAR(15) NOT NULL,
+    correo_trabajador           VARCHAR(100) NOT NULL,
+    correo_empleador_trabajador VARCHAR(100) NOT NULL,
+    especialidad_trabajador     VARCHAR(150),
+    nombre_proye_trabajador     VARCHAR(150) NOT NULL,
+    direccion_proye_trabajador  VARCHAR(150) NOT NULL,
+    duracion_termino_trabajador VARCHAR(50) NOT NULL,
+    
+    CONSTRAINT trabajador_pk PRIMARY KEY (id_trabajador)
+);
