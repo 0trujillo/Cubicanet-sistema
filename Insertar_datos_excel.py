@@ -2,17 +2,24 @@ import pandas as pd
 from sqlalchemy import create_engine
 
 # 1. Cargar el Excel
-df = pd.read_excel(".xlsx")  # Aqui podemos cambiar el nombre de nuestro excel antes del punto
+df = pd.read_excel("trabajadores_prueba.xlsx")
 
-# 2. Conexión a PostgreSQL (es obvio lo que hay que poner)
-usuario = "tu_usuario"
-contrasena = "tu_contraseña"
+# 2. Datos de conexión
+usuario = "postgres"
+contrasena = "Yojansel18"
 host = "localhost"
 puerto = "5432"
-base_datos = "nombre_basedatos"
+base_datos = "cubicanet"
 
-# 3. Crear la conexión usando SQLAlchemy (lo mismo de arriba)
+# 3. Crear conexión con SQLAlchemy
 engine = create_engine(f'postgresql+psycopg2://{usuario}:{contrasena}@{host}:{puerto}/{base_datos}')
 
-# 4. Insertar los datos en la tabla (' ' aqui tenemos que poner el nombre de la tabla)
-df.to_sql('', engine, if_exists='append', index=False)
+# 4. Insertar los datos en la tabla correcta
+df.to_sql('trabajador', engine, if_exists='append', index=False)
+
+# 5. Verificar conexión
+try:
+    with engine.connect() as conn:
+        print("✅ Conexión exitosa a la base de datos y datos insertados.")
+except Exception as e:
+    print("❌ Error al conectar:", e)
