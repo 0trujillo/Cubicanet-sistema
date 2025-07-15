@@ -1,22 +1,22 @@
--- Tabla de AFPs
+
 CREATE TABLE afps (
     id     SERIAL PRIMARY KEY,
     nombre VARCHAR(50) UNIQUE NOT NULL
 );
 
--- Tabla de Sistemas de Salud
+
 CREATE TABLE sistemas_salud (
     id     SERIAL PRIMARY KEY,
     nombre VARCHAR(50) UNIQUE NOT NULL
 );
 
--- Tabla de Estados Civiles
+
 CREATE TABLE estados_civiles (
     id     SERIAL PRIMARY KEY,
     nombre VARCHAR(20) UNIQUE NOT NULL
 );
 
--- Tabla de Empleados
+
 CREATE TABLE empleados (
     id                  SERIAL PRIMARY KEY,
     nombre              VARCHAR(120) NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE empleados (
     estado_civil_id     INT REFERENCES estados_civiles(id)
 );
 
--- Ta
+
 CREATE TABLE proyectos (
     id               SERIAL PRIMARY KEY,
     nombre           VARCHAR(150) UNIQUE NOT NULL,
