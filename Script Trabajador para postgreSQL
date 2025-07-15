@@ -1,26 +1,60 @@
-CREATE TABLE trabajador (
-    id_trabajador                INTEGER NOT NULL,
-    nombre_completo_trabajador  VARCHAR(120) NOT NULL,
-    nacionalidad                VARCHAR(50) NOT NULL,
-    dv_trabajador               CHAR(1) NOT NULL,
-    rut_trabajador              VARCHAR(20) NOT NULL,
-    fecha_nacimiento_trabajador VARCHAR(20) NOT NULL,
-    fecha_ingreso_trabajador    VARCHAR(20) NOT NULL,
-    estado_civil_trabajador     VARCHAR(20) NOT NULL,
-    procedencia_trabajador      VARCHAR(50) NOT NULL,
-    direeccion_trabajador       VARCHAR(300) NOT NULL,
-    afp_trabajador              VARCHAR(100) NOT NULL,
-    sistema_salud_trabajador    VARCHAR(50) NOT NULL,
-    posee_cuenta_trabajador     VARCHAR(50) NOT NULL,
-    edad                        INTEGER NOT NULL,
-    telefono_emerg_trabajador   VARCHAR(15) NOT NULL,
-    telefono_trabajador         VARCHAR(15) NOT NULL,
-    correo_trabajador           VARCHAR(100) NOT NULL,
-    correo_empleador_trabajador VARCHAR(100) NOT NULL,
-    especialidad_trabajador     VARCHAR(150),
-    nombre_proye_trabajador     VARCHAR(150) NOT NULL,
-    direccion_proye_trabajador  VARCHAR(150) NOT NULL,
-    duracion_termino_trabajador VARCHAR(50) NOT NULL,
-    
-    CONSTRAINT trabajador_pk PRIMARY KEY (id_trabajador)
+-- Tabla de AFPs
+CREATE TABLE afps (
+    id     SERIAL PRIMARY KEY,
+    nombre VARCHAR(50) UNIQUE NOT NULL
 );
+
+-- Tabla de Sistemas de Salud
+CREATE TABLE sistemas_salud (
+    id     SERIAL PRIMARY KEY,
+    nombre VARCHAR(50) UNIQUE NOT NULL
+);
+
+-- Tabla de Estados Civiles
+CREATE TABLE estados_civiles (
+    id     SERIAL PRIMARY KEY,
+    nombre VARCHAR(20) UNIQUE NOT NULL
+);
+
+-- Tabla de Empleados
+CREATE TABLE empleados (
+    id                  SERIAL PRIMARY KEY,
+    nombre              VARCHAR(120) NOT NULL,
+    rut                 VARCHAR(12) UNIQUE NOT NULL,
+    correo_trabajador   TEXT UNIQUE,
+    fecha_nacimiento    DATE NOT NULL,
+    cuenta_rut          BOOLEAN DEFAULT FALSE,
+    estado_civil_id     INT REFERENCES estados_civiles(id)
+);
+
+-- Ta
+CREATE TABLE proyectos (
+    id               SERIAL PRIMARY KEY,
+    nombre           VARCHAR(150) UNIQUE NOT NULL,
+    fecha_inicio     DATE,
+    fecha_termino    DATE
+);
+
+
+CREATE TABLE contratos (
+    id                  SERIAL PRIMARY KEY,
+    empleado_id         INT UNIQUE NOT NULL REFERENCES empleados(id),
+    proyecto_id         INT NOT NULL REFERENCES proyectos(id),
+    fecha_ingreso       DATE NOT NULL,
+    afp_id              INT REFERENCES afps(id),
+    sistema_salud_id    INT REFERENCES sistemas_salud(id),
+    telefono_emp        VARCHAR(15),
+    correo_empl         TEXT,
+    sueldo_diario       NUMERIC(10,2),
+    anticipo            NUMERIC(10,2) DEFAULT 0,
+    created_at          TIMESTAMP WITH TIME ZONE DEFAULT now(),
+    updated_at          TIMESTAMP WITH TIME ZONE DEFAULT now()
+);
+
+--Un empleado puede estar solo en un contrato.
+
+--Un contrato siempre está vinculado a:
+    --un empleado
+    --un proyecto
+    --un AFP y sistema de salud
+
