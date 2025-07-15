@@ -20,3 +20,9 @@ Características:
 -  Generación de registro de errores para filas con formatos inválidos.
 -  Visualización dinámica de la "pseudo-tabla" usando Tabulator en un frontend con Vue.js
 -  Enlaces dinámicos (hypervínculos) para navegación entre registros.
+
+
+
+REQUERIMIENTOS  A CUBRIR:
+
+Hacer un apartado que permita cambiar la obra para hacer los "anexos de contrato"
