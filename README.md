@@ -12,6 +12,10 @@ sqlalchemy: para gestionar la conexión a PostgreSQL.
 
 psycopg2-binary: adaptador PostgreSQL para Python.
 
+## Modelo de BD
+
+- La estructura de tablas está en [`/docs/BD_modelo.png`](docs/BD_modelo.png).
+
 Comando para instalar las dependencias necesarias: pip install pandas openpyxl sqlalchemy psycopg2-binary
 
 Características:
