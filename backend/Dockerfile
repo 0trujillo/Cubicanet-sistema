@@ -1,13 +1,7 @@
-# 1) Build
-FROM node:18-alpine AS build
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci
+FROM python:3.11-slim
+WORKDIR /srv
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
-RUN npm run build
-
-# 2) Serve
-FROM nginx:stable-alpine
-COPY --from=build /app/dist /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 8000
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
