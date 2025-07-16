@@ -1,4 +1,12 @@
-CREATE TABLE afps (
+drop table if exists contratos;
+drop table if exists empleados;
+drop table if exists proyectos;
+drop table if exists afp;
+drop table if exists sistemas_salud;
+drop table if exists estados_civil;
+
+
+CREATE TABLE afp (
     id     SERIAL PRIMARY KEY,
     nombre VARCHAR(50) UNIQUE NOT NULL
 );
@@ -10,7 +18,7 @@ CREATE TABLE sistemas_salud (
 );
 
 
-CREATE TABLE estados_civiles (
+CREATE TABLE estados_civil (
     id     SERIAL PRIMARY KEY,
     nombre VARCHAR(20) UNIQUE NOT NULL
 );
@@ -23,7 +31,7 @@ CREATE TABLE empleados (
     correo_trabajador   TEXT UNIQUE,
     fecha_nacimiento    DATE NOT NULL,
     cuenta_rut          BOOLEAN DEFAULT FALSE,
-    estado_civil_id     INT REFERENCES estados_civiles(id)
+    estado_civil_id     INT REFERENCES estados_civil(id)
 );
 
 
@@ -35,12 +43,12 @@ CREATE TABLE proyectos (
 );
 
 
-CREATE TABLE contratos (
+CREATE TABLE contrato (
     id                  SERIAL PRIMARY KEY,
     empleado_id         INT UNIQUE NOT NULL REFERENCES empleados(id),
     proyecto_id         INT NOT NULL REFERENCES proyectos(id),
     fecha_ingreso       DATE NOT NULL,
-    afp_id              INT REFERENCES afps(id),
+    afp_id              INT REFERENCES afp(id),
     sistema_salud_id    INT REFERENCES sistemas_salud(id),
     telefono_emp        VARCHAR(15),
     correo_empl         TEXT,
