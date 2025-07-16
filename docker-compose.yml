@@ -28,7 +28,14 @@ services:
 networks:
   cubicanet:
     external: true
+#final de la conexion a BD
 
-
-# aca termina la conexion
+#backend
+app:
+  build: .
+  env_file: .env
+  ports:
+    - "8000:8000"
+  depends_on:
+    - db
 
