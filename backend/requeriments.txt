@@ -1,7 +1,0 @@
-fastapi
-uvicorn[standard]
-asyncpg
-pydantic
-pandas
-openpyxl
-python-dotenv
