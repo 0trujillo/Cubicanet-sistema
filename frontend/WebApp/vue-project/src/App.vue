@@ -1,39 +1,39 @@
 <template>
-  <div class="p-6 max-w-4xl mx-auto">
-    <h1 class="text-3xl font-bold mb-4">Gestión de Empleados</h1>
-    <EmpleadoForm :empleadoEditado="empleadoSeleccionado" @recargar="cargarEmpleados" />
-    <EmpleadoTabla :empleados="empleados" @editar="seleccionarEmpleado" @eliminar="eliminarEmpleado" />
+  <div class="flex min-h-screen bg-gray-100">
+    <aside class="w-64 bg-blue-900 text-white p-6 space-y-6">
+      <h2 class="text-2xl font-bold mb-8">EmpleadosApp</h2>
+      <nav class="flex flex-col space-y-3">
+        <RouterLink
+          to="/"
+          class="block py-2 px-3 rounded hover:bg-blue-700"
+          active-class="bg-blue-700"
+          exact
+        >
+          Inicio 
+        </RouterLink>
+        <RouterLink
+          to="/empleados"
+          class="block py-2 px-3 rounded hover:bg-blue-700"
+          active-class="bg-blue-700"
+        >
+          Empleados
+        </RouterLink>
+        <RouterLink
+          to="/registro"
+          class="block py-2 px-3 rounded hover:bg-blue-700"
+          active-class="bg-blue-700"
+        >
+          Tarja
+        </RouterLink>
+      </nav>
+    </aside>
+
+    <main class="flex-1 p-6">
+      <RouterView />
+    </main>
   </div>
 </template>
 
-<script>
-import axios from 'axios';
-import EmpleadoForm from '@/components/EmpleadoForm.vue';
-import EmpleadoTabla from '@/components/EmpleadoTabla.vue';
-
-export default {
-  components: { EmpleadoForm, EmpleadoTabla },
-  data() {
-    return {
-      empleados: [],
-      empleadoSeleccionado: null
-    };
-  },
-  methods: {
-    async cargarEmpleados() {
-      const res = await axios.get('http://localhost:5000/api/empleados');
-      this.empleados = res.data;
-    },
-    seleccionarEmpleado(emp) {
-      this.empleadoSeleccionado = { ...emp };
-    },
-    async eliminarEmpleado(id) {
-      await axios.delete(`http://localhost:5000/api/empleados/${id}`);
-      this.cargarEmpleados();
-    }
-  },
-  mounted() {
-    this.cargarEmpleados();
-  }
-};
+<script setup>
+import { RouterLink, RouterView } from 'vue-router'
 </script>
