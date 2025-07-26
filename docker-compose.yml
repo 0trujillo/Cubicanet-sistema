@@ -25,6 +25,20 @@ services:
     networks:
       - cubicanet
 
+  frontend:
+    build:
+      context: ./frontend/WebApp/vue-project
+      dockerfile: Dockerfile
+    container_name: cubicanet_frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend/WebApp/vue-project:/app
+    networks:
+      - cubicanet
+    depends_on:
+      - app
+
 networks:
   cubicanet:
     external: true
